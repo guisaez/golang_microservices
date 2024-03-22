@@ -2,6 +2,7 @@ version: '3.9'
 
 services:
   front-end-service:
+    image: guillesaez15/golang_microservices_front_end:latest
     build:
       context: ./front-end
       dockerfile: front-end-service.dockerfile
@@ -15,6 +16,7 @@ services:
       - golang-microservices
 
   broker-service:
+    image: guillesaez15/golang_microservices_broker:latest
     build:
       context: ./broker-service
       dockerfile: broker-service.dockerfile
