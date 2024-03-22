@@ -22,7 +22,7 @@ jobs:
 
     - name: Build and Push Docker Image
       run : |
-        docker compose build --force-recreate
+        docker compose build
         docker compose push
 
     - name: Transfer docker-compose.yml to Server
