@@ -8,7 +8,7 @@ services:
       dockerfile: front-end-service.dockerfile
     restart: always
     ports: 
-      - "3000:3001"
+      - "3000:3000"
     deploy: 
       mode: replicated
       replicas: 1
@@ -22,7 +22,7 @@ services:
       dockerfile: broker-service.dockerfile
     restart: always
     ports: 
-      - "3000:3001"
+      - "3001:3000"
     deploy: 
       mode: replicated
       replicas: 1
