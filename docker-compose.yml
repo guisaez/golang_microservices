@@ -4,7 +4,7 @@ services:
   front-end-service:
     build:
       context: ./front-end
-      dockerfile: ./front-end/front-end-service.dockerfile
+      dockerfile: front-end-service.dockerfile
     restart: always
     ports: 
       - "80:80"
@@ -17,7 +17,7 @@ services:
   broker-service:
     build:
       context: ./broker-service
-      dockerfile: ./broker-service/broker-service.dockerfile
+      dockerfile: broker-service.dockerfile
     restart: always
     ports: 
       - "3000:80"
