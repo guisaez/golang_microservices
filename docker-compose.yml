@@ -1,13 +1,26 @@
 version: '3.9'
 
 services:
+  front-end-service:
+    build:
+      context: ./front-end
+      dockerfile: ./front-end/front-end-service.dockerfile
+    restart: always
+    ports: 
+      - "80:80"
+    deploy: 
+      mode: replicated
+      replicas: 1
+    networks:
+      - golang-microservices
+
   broker-service:
     build:
       context: ./broker-service
       dockerfile: ./broker-service/broker-service.dockerfile
     restart: always
     ports: 
-      - "3000:3000"
+      - "3000:80"
     deploy: 
       mode: replicated
       replicas: 1
@@ -15,5 +28,5 @@ services:
       - golang-microservices
 
 networks:
-  golang_microservices
+  golang-microservices:
     driver: bridge
