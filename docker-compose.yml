@@ -2,8 +2,9 @@ version: '3.9'
 
 services:
   front-end-service:
-    container_name: golang_microservices_front_end_service
-    image: guillesaez15/golang_microservices_front_end
+    build:
+      context: ./front-end
+      dockerfile: front-end-service.dockerfile
     restart: always
     ports: 
       - "80:80"
@@ -14,8 +15,9 @@ services:
       - golang-microservices
 
   broker-service:
-    container_name: golang_microservices_broker_service
-    image: guillesaez15/golang_microservices_broker_service
+    build:
+      context: ./broker-service
+      dockerfile: broker-service.dockerfile
     restart: always
     ports: 
       - "3000:80"
