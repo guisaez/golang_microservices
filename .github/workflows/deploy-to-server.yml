@@ -44,15 +44,6 @@ jobs:
         port: ${{ secrets.SSH_PORT }}
         script: |
           cd /media/server/WareHouse/docker-containers/golang_microservices
-
-          # Check if the network exists
-          if ! docker network inspect golang-microservices >/dev/null 2>&1; then
-            echo "Creating Docker network golang-microservices"
-            docker network create golang-microservices
-          else
-            echo "Docker network golang-microservices already exists"
-          fi
-
           docker compose pull
           docker compose up -d
 
