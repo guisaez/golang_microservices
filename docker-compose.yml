@@ -1,0 +1,19 @@
+version: '3.9'
+
+services:
+  broker-service:
+    build:
+      context: ./broker-service
+      dockerfile: ./broker-service/broker-service.dockerfile
+    restart: always
+    ports: 
+      - "3000:3000"
+    deploy: 
+      mode: replicated
+      replicas: 1
+    networks:
+      - golang-microservices
+
+networks:
+  golang_microservices
+    driver: bridge
