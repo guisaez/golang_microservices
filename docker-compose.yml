@@ -26,6 +26,8 @@ services:
     deploy: 
       mode: replicated
       replicas: 1
+    ports:
+      - "82:3000"
     networks:
       - golang-microservices
 
