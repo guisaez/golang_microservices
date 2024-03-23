@@ -42,7 +42,7 @@
                 method: 'POST'
             }
 
-            fetch("http://broker-service:3000", body)
+            fetch("https://broker-service:3000", body)
             .then((response) => response.json())
             .then((data) => {
                 sent.innerHTML = "empty post request";
