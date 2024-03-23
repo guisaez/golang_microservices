@@ -42,10 +42,10 @@
                 method: 'POST'
             }
 
-            fetch("http:\/\/guillesaez15_golang_microservices_broker:3000", body)
+            fetch("http:\/\/golang_microservices_broker:3000", body)
             .then((response) => response.json())
             .then((data) => {
-                sent.innerHTML("empty post request");
+                sent.innerHTML = "empty post request";
                 received.innerHTML = JSON.stringify(data, undefined, 4)
                 if (data.error) {
                     console.log(data.message)
