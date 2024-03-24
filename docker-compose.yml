@@ -44,7 +44,7 @@ services:
       mode: replicated
       replicas: 1
     networks:
-      - golang-microservices
+      - golang_microservices
 
   broker-service:
     container_name: broker-service
@@ -59,8 +59,8 @@ services:
     ports:
       - '82:3000'
     networks:
-      - golang-microservices
+      - golang_microservices
 
 networks:
-  golang-microservices:
+  golang_microservices:
     driver: bridge
