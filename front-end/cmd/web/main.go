@@ -1,10 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"html/template"
 	"log"
 	"net/http"
+	"os"
 )
 
 func main() {
@@ -34,13 +34,29 @@ func render(w http.ResponseWriter, t string) {
 		templateSlice = append(templateSlice, x)
 	}
 
+	env := os.Getenv("APP_ENV")
+
+	var baseURL string
+
+	if env == "dev" {
+		baseURL = "http://localhost:3000"
+	} else {
+		baseURL = "https://www.planjavaservices.work/priv/golang_microservices"
+	}
+
+	data := struct {
+		RequestBaseURL string
+	}{
+		RequestBaseURL: baseURL ,
+	}
+
 	tmpl, err := template.ParseFiles(templateSlice...)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	if err := tmpl.Execute(w, nil); err != nil {
+	if err := tmpl.Execute(w, data); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }

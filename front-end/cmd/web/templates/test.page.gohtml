@@ -42,7 +42,7 @@
                 method: 'POST'
             }
 
-            fetch("https://www.planjavaservices.work/priv/golang_microservices", body)
+            fetch("{{.RequestBaseURL}}", body)
             .then((response) => response.json())
             .then((data) => {
                 sent.innerHTML = "empty post request";
