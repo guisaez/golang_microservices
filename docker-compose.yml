@@ -1,6 +1,36 @@
 version: '3.9'
 
 services:
+  postgres:
+    container_name: postgres
+    image: 'postgres:14.2'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: users
+    volumes:
+      - ./db-data/postgres/:/var/lib/postgresql/data/
+    deploy:
+      mode: replicated
+      replicas: 1
+    networks:
+      - golang_microservices
+
+  auth-service:
+    container_name: auth-service
+    image: guillesaez15/golang_microservices_auth:latest
+    build:
+      context: ./auth-service
+      dockerfile: auth-service.dockerfile
+    restart: always
+    deploy:
+      mode: replicated
+      replicas: 1
+    networks:
+      - golang_microservices
+    environment:
+      DSN: 'host=postgres port=5432 user=postgres password=password dbname=users sslmode=disabled timezone=UTC connect_timeout=5'
+
   front-end-service:
     container_name: front-end-service
     image: guillesaez15/golang_microservices_front_end:latest
@@ -8,9 +38,9 @@ services:
       context: ./front-end
       dockerfile: front-end-service.dockerfile
     restart: always
-    ports: 
-      - "81:80"
-    deploy: 
+    ports:
+      - '81:80'
+    deploy:
       mode: replicated
       replicas: 1
     networks:
@@ -23,11 +53,11 @@ services:
       context: ./broker-service
       dockerfile: broker-service.dockerfile
     restart: always
-    deploy: 
+    deploy:
       mode: replicated
       replicas: 1
     ports:
-      - "82:3000"
+      - '82:3000'
     networks:
       - golang-microservices
 
