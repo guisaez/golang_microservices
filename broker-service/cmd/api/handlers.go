@@ -48,7 +48,7 @@ func (app *Config) authenticate(w http.ResponseWriter, payload AuthPayload){
 	jsonData, _ := json.MarshalIndent(payload, "", "\t")
 
 	// call the service
-	request, err := http.NewRequest("POST", "http://auth-service/authenticate", bytes.NewBuffer(jsonData))
+	request, err := http.NewRequest("POST", "http://auth-service:3000/authenticate", bytes.NewBuffer(jsonData))
 	if err != nil {
 		app.errorJSON(w, err)
 		return
@@ -86,7 +86,7 @@ func (app *Config) authenticate(w http.ResponseWriter, payload AuthPayload){
 
 	var returnPayload jsonResponse
 	returnPayload.Error = false
-	returnPayload.Message = "Authentication!"
+	returnPayload.Message = "Authenticated!"
 	returnPayload.Data = jsonFromService.Data
 
 	app.writeJSON(w, http.StatusAccepted, payload)
