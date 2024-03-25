@@ -89,5 +89,5 @@ func (app *Config) authenticate(w http.ResponseWriter, payload AuthPayload){
 	returnPayload.Message = "Authenticated!"
 	returnPayload.Data = jsonFromService.Data
 
-	app.writeJSON(w, http.StatusAccepted, payload)
+	app.writeJSON(w, http.StatusAccepted, returnPayload)
 }
