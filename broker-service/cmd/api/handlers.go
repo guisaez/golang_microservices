@@ -81,9 +81,9 @@ func (app *Config) logItem(w http.ResponseWriter, payload LogPayload) {
 
 	var returnPayload jsonResponse
 	returnPayload.Error = false
-	returnPayload.Message = "logged"
+	returnPayload.Message = "Logged"
 
-	app.writeJSON(w, http.StatusAccepted, payload)
+	app.writeJSON(w, http.StatusAccepted, returnPayload)
 
 }
 
