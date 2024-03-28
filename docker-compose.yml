@@ -81,10 +81,10 @@ services:
       - golang_microservices
 
   logger-service:
-    container_name: broker-service
+    container_name: logger-service
     image: guillesaez15/golang_microservices_logger:latest
     build:
-      context: ./logger
+      context: ./logger-service
       dockerfile: logger-service.dockerfile
     restart: always
     deploy:
