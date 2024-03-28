@@ -18,6 +18,23 @@ services:
     networks:
       - golang_microservices
 
+  mongodb:
+    container_name: mongodb
+    image: 'mongo:4.2.6-bionic'
+    ports:
+      - "27017":"27017"
+    environment:
+      MONGO_INITDB_DATABASE: logs
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      -./db-data/mongo/:/data/db
+    deploy:
+      mode: replicated
+      replicas: 1
+    networks:
+      - golang_microservices
+    
   auth-service:
     container_name: auth-service
     image: guillesaez15/golang_microservices_auth:latest
@@ -60,6 +77,19 @@ services:
       replicas: 1
     ports:
       - '82:3000'
+    networks:
+      - golang_microservices
+
+  logger-service:
+    container_name: broker-service
+    image: guillesaez15/golang_microservices_logger:latest
+    build:
+      context: ./logger
+      dockerfile: logger-service.dockerfile
+    restart: always
+    deploy:
+      mode: replicated
+      replicas: 1
     networks:
       - golang_microservices
 
