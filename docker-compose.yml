@@ -34,7 +34,7 @@ services:
       replicas: 1
     networks:
       - golang_microservices
-    
+
   auth-service:
     container_name: auth-service
     image: guillesaez15/golang_microservices_auth:latest
@@ -90,6 +90,15 @@ services:
     deploy:
       mode: replicated
       replicas: 1
+    networks:
+      - golang_microservices
+
+  mailhog:
+    container_name: golang-microservice-mailhog
+    image: 'mailhog/mailhog:latest'
+    ports:
+      - '1025:1025'
+      - '8025:8025'
     networks:
       - golang_microservices
 
