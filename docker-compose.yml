@@ -125,7 +125,7 @@ services:
       - golang_microservices
 
   listener-service:
-    container-name: listener-service
+    container_name: listener-service
     image: guillesaez15/golang_microservices_listener:latest
     build:
       context: ./listener-service
