@@ -117,12 +117,38 @@ services:
       MAIL_HOST: mailhog
       MAIL_PORT: 1025
       MAIL_ENCRYPTION: none
-      MAIL_USERNAME: ""
-      MAIL_PASSWORD: ""
-      FROM_NAME: "Jhon Smith"
-      FROM_ADDRESS: "john.smith@example.com"
+      MAIL_USERNAME: ''
+      MAIL_PASSWORD: ''
+      FROM_NAME: 'Jhon Smith'
+      FROM_ADDRESS: 'john.smith@example.com'
     networks:
       - golang_microservices
+
+  listener-service:
+    container-name: listener-service
+    image: guillesaez15/golang_microservices_listener:latest
+    build:
+      context: ./listener-service
+      dockerfile: ./listener-service.dockerfile
+    restart: always
+    deploy:
+      mode: replicated
+      replicas: 1
+    networks:
+      - golang_microservices
+
+  rabbitmq:
+    image: 'rabbitmq:3.9-alpine'
+    deploy:
+      mode: replicated
+      replicas: 1
+    ports:
+      - '5672:5672'
+    volumes:
+      - ./db-data/rabbitmq/:/var/lib/rabbitmq/
+    networks:
+      - golang_microservices
+
 
 networks:
   golang_microservices:
