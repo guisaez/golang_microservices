@@ -19,4 +19,4 @@ WORKDIR /app
 COPY --from=builder /app/templates /app/templates
 COPY --from=builder /app/mailService /app/mailService
 
-CMD ["/app/frontEnd"]
+CMD ["/app/mailService"]
