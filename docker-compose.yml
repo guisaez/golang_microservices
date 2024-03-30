@@ -94,11 +94,33 @@ services:
       - golang_microservices
 
   mailhog:
-    container_name: golang-microservice-mailhog
+    container_name: mailhog
     image: 'mailhog/mailhog:latest'
     ports:
       - '1025:1025'
       - '8025:8025'
+    networks:
+      - golang_microservices
+
+  mail-service:
+    container_name: mail-service
+    image: guillesaez15/golang_microservices_mail:latest
+    build:
+      context: ./mail-service
+      dockerfile: ./mail-service.dockerfile
+    restart: always
+    deploy:
+      mode: replicated
+      replicas: 1
+    environment:
+      MAIL_DOMAIN: mailhog
+      MAIL_HOST: mailhog
+      MAIL_PORT: 1025
+      MAIL_ENCRYPTION: none
+      MAIL_USERNAME: ""
+      MAIL_PASSWORD: ""
+      FROM_NAME: "Jhon Smith"
+      FROM_ADDRESS: "john.smith@example.com"
     networks:
       - golang_microservices
 
