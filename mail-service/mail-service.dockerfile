@@ -6,7 +6,7 @@ COPY . /app
 
 WORKDIR /app
 
-RUN CGO_ENABLED=0 go build -o mailService ./cmd/web
+RUN CGO_ENABLED=0 go build -o mailService ./cmd/api
 
 RUN chmod +x /app/mailService
 
