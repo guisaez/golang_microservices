@@ -70,7 +70,7 @@ func (consumer *Consumer) Listen(topics []string) error {
 		}
 	}
 
-	messages, err := ch.Consume(q.Name, "", true, false, false, false, nil)
+	messages, err := ch.Consume(queue.Name, "", true, false, false, false, nil)
 	if err != nil {
 		return err
 	}
