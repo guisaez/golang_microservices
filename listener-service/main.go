@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"listener-service/event"
 	"log"
 	"math"
 	"os"
@@ -21,10 +22,17 @@ func main() {
 
 	// Start listening for messages
 
-	// Create consumer
+	log.Println("Listening for and consuming RabbitMQ messages...")
 
-	// Watch the queue and consume events
+	consumer, err := event.NewConsumer(rabbitConn)
+	if err != nil {
+		panic(err)
+	}
 
+	err = consumer.Listen([]string{"log.INFO", "log.WARNING", "log.ERROR"})
+	if err != nil {
+		log.Println(err)
+	}
 }
 
 func connect() (*amqp.Connection, error) {
