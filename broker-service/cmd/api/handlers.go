@@ -277,7 +277,7 @@ func (app *Config) LogViaGRPC(w http.ResponseWriter, r *http.Request) {
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 		grpc.WithBlock(),
 	}
-	conn ,err := grpc.NewClient("/logger-service", opts...)
+	conn ,err := grpc.NewClient("/logger-service:50001", opts...)
 	if err != nil {
 		app.errorJSON(w, err)
 		return
